@@ -1,2 +1,2 @@
 # shell
-restore for some shell
+restore some shell
