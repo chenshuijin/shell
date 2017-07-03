@@ -1,5 +1,6 @@
 #!/bin/bash
 
+WORKDIR=$(pwd)
 CUSER=$(who am i | cut -d' ' -f1)
 CGROUP=$(groups $CUSER | cut -d' ' -f1)
 LOCAL_SRC=/usr/local/src
@@ -142,12 +143,13 @@ if [ ! $(which pip) ] ; then
 	pyOpenSSL==16.2.0 sha3==0.2.1
 fi
 
-if [ ! $(which nodejs) ] ; then
-    apt-get install -y nodejs-dev
-fi
-
-if [ ! $(which npm) ] ; then
-    apt-get install -y npm
+if [ -z "$(npm -v | grep 3.10.10)" -o -z "$(node -v | grep v6.9.5)" ] ; then
+    cd $LOCAL_SRC
+    git clone https://github.com/nodejs/node.git
+    cd node
+    git checkout -b v6.9.5 tags/v6.9.5
+    ./configure
+    make install
 fi
 
 if [ -z "$(whereis libsnappy.so | grep libsnappy.so)" ] ; then
@@ -185,4 +187,7 @@ if [ ! -d $FABRIC_PATH/fabric/gotools/build ] ; then
     cp $FABRIC_PATH/fabric/gotools/build/gopath/bin/* $FABRIC_PATH/fabric/build/docker/gotools/bin/
 fi
 
+if [ -d $WORKDIR/db ]; then
+    chown -R 1000:docker $WORKDIR/db
+fi
 echo 'the fabric prerequisites install ok'
