@@ -19,4 +19,17 @@ brew install git-flow
 echo 'copy user configuration'
 cat ./profile > ~/.profile
 
+if [ xDarwin == x$(uname) ]; then
+   echo 'export GOROOT=/usr/local/Cellar/go/1.9/libexec' >> ~/.profile
+   echo "export GOPATH=/Users/$(whoami)/git/go" >> ~/.profile
+   echo 'export PATH=$PATH:$GOROOT/bin' >> ~/.profile
+fi
+
+if [ xLinux == x$(uname) ]; then
+   echo 'export GOROOT=/usr/local/src/go' >> ~/.profile
+   echo "export GOPATH=~/git/go" >> ~/.profile
+   echo 'export PATH=$PATH:$GOROOT/bin' >> ~/.profile
+fi
+
+
 echo 'Your mac has been configed finished, enjoy your work!'
