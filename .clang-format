@@ -1,0 +1,22 @@
+---
+Language: Proto
+BasedOnStyle: google
+
+# 访问说明符(public、private等)的偏移
+# AccessModifierOffset: -4
+
+IndentWidth: 2
+
+# 左括号(左圆括号、左尖括号、左方括号)后的对齐: Align, DontAlign, AlwaysBreak(总是在左括号后换行)
+AlignAfterOpenBracket: Align
+
+# 连续赋值时，对齐所有等号
+AlignConsecutiveAssignments: true
+
+# 连续声明时，对齐所有声明的变量名
+AlignConsecutiveDeclarations: true
+
+# 水平对齐二元和三元表达式的操作数
+AlignOperands: Align
+
+ColumnLimit: 0
